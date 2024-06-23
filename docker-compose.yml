@@ -1,4 +1,4 @@
-version: "3"
+version: "3.3"
 
 services:
   l11-app:
@@ -28,7 +28,7 @@ services:
       NGINX_LISTEN_PORT: "${DOCKER_NGINX_LISTEN_PORT}"
     restart: unless-stopped
     ports:
-      - "${DOCKER_NGINX_PORT}:${DOCKER_NGINX_LISTEN_PORT}"
+      - "${DOCKER_BACKEND_PORT}:${DOCKER_NGINX_LISTEN_PORT}"
     volumes:
       - ./backend:/var/www/html
 #      - ./_docker/data/nginx/conf.d:/etc/nginx/conf.d
@@ -39,8 +39,6 @@ services:
     image: mysql:8.3.0
     container_name: l11-db
     restart: unless-stopped
-    env_file:
-      - ./backend/.env
     environment:
       MYSQL_DATABASE: "${DB_DATABASE}"
       MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
@@ -55,29 +53,31 @@ services:
       - ./_docker/mysql:/docker-entrypoint-initdb.d
     networks:
       - l11-net
+#
+#
+#  l11-node:
+#    build:
+#      context: ./_docker/node
+#      dockerfile: Dockerfile
+#    container_name: l11-node
+#    tty: true
+#    restart: unless-stopped
+#    ports:
+#      - "${DOCKER_FRONT_PORT}:8080"
+#    working_dir: /var/www
+#    volumes:
+#      - ./frontend/:/var/www
+#    networks:
+#      - l11-net
 
-  l11-redis:
-    image: redis:alpine
-    container_name: l11-redis
-    restart: unless-stopped
-    volumes:
-      - ./_docker/data/redis:/data
-    networks:
-      - l11-net
-
-  l11-node:
-    build:
-      context: ./_docker/node
-      dockerfile: Dockerfile
-    container_name: l11-node
-    restart: unless-stopped
-    ports:
-      - "${DOCKER_NODE_PORT}:8080"
-    working_dir: /var/www
-    volumes:
-      - ./frontend/:/var/www
-    networks:
-      - l11-net
+#  l11-redis:
+#    image: redis:alpine
+#    container_name: l11-redis
+#    restart: unless-stopped
+#    volumes:
+#      - ./_docker/data/redis:/data
+#    networks:
+#      - l11-net
 
 
 networks:
