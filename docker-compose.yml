@@ -53,22 +53,22 @@ services:
       - ./_docker/mysql:/docker-entrypoint-initdb.d
     networks:
       - l11-net
-#
-#
-#  l11-node:
-#    build:
-#      context: ./_docker/node
-#      dockerfile: Dockerfile
-#    container_name: l11-node
-#    tty: true
-#    restart: unless-stopped
-#    ports:
-#      - "${DOCKER_FRONT_PORT}:8080"
-#    working_dir: /var/www
-#    volumes:
-#      - ./frontend/:/var/www
-#    networks:
-#      - l11-net
+
+  l11-node:
+    build:
+      context: ./_docker/node
+      dockerfile: Dockerfile
+    image: l11-node
+    container_name: l11-node
+    tty: true
+    restart: unless-stopped
+    ports:
+      - "${DOCKER_FRONT_PORT}:8080"
+    working_dir: /var/www
+    volumes:
+      - ./frontend/:/var/www/html/
+    networks:
+      - l11-net
 
 #  l11-redis:
 #    image: redis:alpine

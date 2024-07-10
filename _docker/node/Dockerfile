@@ -8,9 +8,7 @@ RUN apt-get update && apt-get install -y \
     curl
 
 RUN npm install -g @vue/cli
-# Change current user
-USER node
 
-#EXPOSE 5173
 
-CMD ["sh", "-c", "npm install && npm run serve"]
+#CMD ["sh", "-c", "npm install && npm run serve"]
+#CMD ["sh", "-c", "yarn install && yarn run serve"]
