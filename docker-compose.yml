@@ -54,12 +54,12 @@ services:
     networks:
       - l11-net
 
-  l11-node:
+  l11-front:
     build:
       context: ./_docker/node
       dockerfile: Dockerfile
-    image: l11-node
-    container_name: l11-node
+    image: l11-front
+    container_name: l11-front
     tty: true
     restart: unless-stopped
     ports:
