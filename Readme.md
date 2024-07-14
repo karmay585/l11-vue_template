@@ -4,8 +4,7 @@
 
 
 1. Manage .env
-
-   ```git checkout 1_stage```  
+ 
    ```cp .env.example .env```
 
    **DOCKER_USER** - system username<br>
@@ -56,7 +55,4 @@
     ```
     Проверить работу vue:
     ```cd html ``` ``` yarn serve ``` В браузере открыть localhost с указанием порта объявленного в DOCKER_FRONT_PORT
-
-4.  переключаем на 3 ветку или мастер, где при билде контейнера сразу запускается проект
-
     
